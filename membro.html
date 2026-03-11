@@ -160,7 +160,7 @@
        <!-- <button onclick="mudarSecao('lista')" class="nav-btn active" id="btn-lista"><i class="fas fa-users"></i> Membros</button> -->
         <!-- <button onclick="mudarSecao('celulas')" class="nav-btn" id="btn-celulas"><i class="fas fa-network-wired"></i> Células</button> -->
         <!-- <button onclick="mudarSecao('relatorio')" class="nav-btn" id="btn-relatorio"><i class="fas fa-clipboard-list"></i> Relatório</button> -->
-        <button onclick="mudarSecao('agenda')" class="nav-btn" id="btn-agenda"><i class="far fa-calendar-alt"></i> Agenda</button>
+        <button onclick="mudarSecao('agenda')" class="nav-btn active" id="btn-agenda"><i class="far fa-calendar-alt"></i> Agenda</button>
         <button onclick="mudarSecao('palavras')" class="nav-btn" id="btn-palavras"><i class="fas fa-book-open"></i> Palavras</button>
         <button onclick="mudarSecao('sugestao')" class="nav-btn" id="btn-sugestao"><i class="fa-solid fa-hands-praying"></i> Ped. Oração</button>
       </div>
@@ -195,6 +195,7 @@
       <div id="secao-palavras" class="hidden">
          <h4 style="color: var(--accent); margin-top:0; margin-bottom: 15px;">Palavras & Estudos</h4>
          <div id="listaPalavras">
+          
            <p style="text-align:center; color:#999;">Carregando...</p>
          </div>
       </div>
@@ -480,8 +481,7 @@
                 return pegarTempo(b.data) - pegarTempo(a.data);
             });
 
-            renderizarPalavras(listaPalavras);
-          carregarFinanceiro();
+            renderizarPalavras(listaPalavras);          
         } catch (e) { console.error("Erro Palavras Supabase:", e); }
 
         // 2. DADOS DO GOOGLE SCRIPT (Exclusivo da Agenda)
