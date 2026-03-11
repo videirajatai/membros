@@ -340,13 +340,21 @@
     </div>
 
     <script>
-      const API_URL = sessionStorage.getItem('urlApi');
+      <script>
+    // --- RECUPERAÇÃO DAS CONFIGURAÇÕES DO INDEX ---
+    const urlBackend = sessionStorage.getItem('urlApi');
+    const SB_URL = sessionStorage.getItem('sbUrl');
+    const SB_KEY = sessionStorage.getItem('sbKey');
 
-      // --- CREDENCIAIS DO SUPABASE ---
-      const SB_URL = "https://ryvfogmfpjyamgqsltks.supabase.co"; 
-      const SB_KEY = "sb_publishable_nFMOC-fPkJnsmf5_noOTBg_tKV6Cr1q";
+    // Segurança: se as variáveis não existirem, volta para o login/index
+    if (!urlBackend || !SB_URL || !SB_KEY) {
+        window.location.href = "index.html";
+    }
 
-      let dadosMembros = [], dadosCelulas = [], listaPalavras = [], listaAgenda = [];
+    // Agora você pode usar urlBackend, SB_URL e SB_KEY normalmente no seu código!
+    console.log("Sistema carregado com sucesso!");
+      
+          let dadosMembros = [], dadosCelulas = [], listaPalavras = [], listaAgenda = [];
       
       window.onload = carregarTudo;
 
