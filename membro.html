@@ -131,7 +131,7 @@
 
     <script>
       const paginasPermitidas = JSON.parse(sessionStorage.getItem('paginasPermitidas') || "[]");
-      if(!sessionStorage.getItem('usuarioLogado') || !paginasPermitidas.includes("lider")) {
+      if(!sessionStorage.getItem('usuarioLogado') || !paginasPermitidas.includes("membro")) {
           window.location.href = "index.html";
       }
     </script>
