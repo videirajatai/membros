@@ -3,63 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Videira Jataí - Carregando...</title>
+    <title>App - Videira Jataí</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://img.linkme.bio/img/2021/05/10141826/logo-videira-circulo-1.png">
+    <link rel="stylesheet" href="style.css">
 
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="shortcut icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Sistema Videira">
+    <meta name="apple-mobile-web-app-title" content="Sistema Videira">
+    <meta name="theme-color" content="#0f172a"> 
+    <link rel="manifest" href="manifest.json">
     <style>
-        body, html { height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f4f7f6 0%, #e2e8f0 100%); font-family: 'Inter', sans-serif; overflow: hidden; }
-        #splash-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.4s ease; opacity: 1; }
-        .splash-logo { width: 120px; animation: pulse 1.5s infinite ease-in-out; }
-        #splash-screen p { margin-top: 25px; color: #2d3748; font-size: 16px; font-weight: 600; text-align: center; }
-        @keyframes pulse { 0% { transform: scale(0.95); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(0.95); opacity: 0.8; } }
+        :root {
+            --primary: #800020; /* Ajuste para a cor exata do seu style.css se necessário */
+            --bg-color: #f4f7f6;
+            --text-main: #333333;
+            --text-light: #718096;
+            --nav-bg: #ffffff;
+        }
+
+        body, html { 
+            height: 100%; 
+            margin: 0; 
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f4f7f6 0%, #e2e8f0 100%); 
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* CABEÇALHO */
+        header {
+            background-color: var(--nav-bg);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .logo { width: 40px; height: auto; margin-right: 10px; }
+        header h1 { color: var(--primary); font-size: 18px; margin: 0; font-weight: 700; }
+
+        /* ÁREA DE CONTEÚDO (ABAS) */
+        #content-area {
+            flex: 1;
+            overflow-y: auto;
+            position: relative;
+            padding-bottom: 70px; /* Espaço para o menu inferior */
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* CARTÕES DE CONTEÚDO */
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+
+        .card h2 { color: var(--primary); font-size: 20px; margin-top: 0; margin-bottom: 10px; font-weight: 700; }
+        .card p { color: var(--text-light); font-size: 14px; line-height: 1.5; }
+
+        /* NAVEGAÇÃO INFERIOR */
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-bg);
+            box-shadow: 0 -2px 15px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            padding-bottom: env(safe-area-inset-bottom, 10px); /* Ajuste para iPhones */
+            z-index: 20;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            flex: 1;
+            padding: 8px 0;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+            fill: currentColor;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
-    <div id="splash-screen">
-        <img src="https://img.linkme.bio/img/2021/05/10141826/logo-videira-circulo-1.png" alt="Logo Videira" class="splash-logo">
-        <p id="splash-texto">Iniciando sistema...</p>
+    <header>
+        <img src="https://img.linkme.bio/img/2021/05/10141826/logo-videira-circulo-1.png" alt="Logo Videira" class="logo">
+        <h1>Videira Jataí</h1>
+    </header>
+
+    <div id="content-area">
+        
+        <div id="aba-biblia" class="tab-content active">
+            <div class="card">
+                <h2>Bíblia</h2>
+                <p>Aqui você pode inserir o leitor bíblico, iframes ou a lógica da API da Bíblia que você já utiliza.</p>
+            </div>
+        </div>
+
+        <div id="aba-agenda" class="tab-content">
+            <div class="card">
+                <h2>Agenda</h2>
+                <p>Aqui você pode carregar os dados vindos do seu Google Apps Script.</p>
+                <button onclick="carregarAgenda()" style="background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%;">Sincronizar Agenda</button>
+            </div>
+        </div>
+
+        <div id="aba-palavras" class="tab-content">
+            <div class="card">
+                <h2>Palavras</h2>
+                <p>Espaço reservado para as palavras, esboços de células e ministrações.</p>
+            </div>
+        </div>
+
     </div>
 
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="mudarAba('aba-biblia', this)">
+            <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>
+            Bíblia
+        </button>
+        <button class="nav-item" onclick="mudarAba('aba-agenda', this)">
+            <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7v-5z"/></svg>
+            Agenda
+        </button>
+        <button class="nav-item" onclick="mudarAba('aba-palavras', this)">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            Palavras
+        </button>
+    </nav>
+
     <script>
-        // CONFIGURAÇÕES DO SISTEMA
+        // MANTIDO O BACKEND DO GOOGLE PARA A AGENDA CONFORME SOLICITADO
         const urlBackend = "https://script.google.com/macros/s/AKfycbxnystn3UqAKnfLUgw7tXS8CzrnpxTS0iax80rhMCRs-T47ibodGYvbRw2KRrtsnCzn/exec"; 
-        const SB_URL = "https://ryvfogmfpjyamgqsltks.supabase.co"; 
-        const SB_KEY = "sb_publishable_nFMOC-fPkJnsmf5_noOTBg_tKV6Cr1q";
 
-        window.onload = function() {
-            try {
-                // SALVA AS CONFIGURAÇÕES
-                sessionStorage.setItem('urlApi', urlBackend);
-                sessionStorage.setItem('sbUrl', SB_URL);
-                sessionStorage.setItem('sbKey', SB_KEY);
+        // Função para alternar entre as abas
+        function mudarAba(idAba, elementoBotao) {
+            // Esconde todas as abas
+            const abas = document.querySelectorAll('.tab-content');
+            abas.forEach(aba => aba.classList.remove('active'));
 
-                const texto = document.getElementById('splash-texto');
-                
-                // Mudança de texto para feedback visual
-                setTimeout(() => { 
-                    if(texto) texto.innerText = "Conectando ao banco de dados..."; 
-                }, 800);
+            // Remove a classe 'active' de todos os botões do menu
+            const botoes = document.querySelectorAll('.nav-item');
+            botoes.forEach(botao => botao.classList.remove('active'));
 
-                // Redirecionamento após 2 segundos
-                setTimeout(() => {
-                    const screen = document.getElementById('splash-screen');
-                    if(screen) screen.style.opacity = '0';
-                    
-                    setTimeout(() => {
-                        // Verifica se o arquivo existe antes de ir (redireciona)
-                        window.location.href = "membro.html";
-                    }, 400);
-                }, 2000);
+            // Mostra a aba selecionada e destaca o botão
+            document.getElementById(idAba).classList.add('active');
+            elementoBotao.classList.add('active');
+        }
 
-            } catch (e) {
-                console.error("Erro no carregamento:", e);
-                // Força a saída mesmo se o script der erro
-                window.location.href = "membro.html";
-            }
-        };
+        // Função de exemplo para usar o urlBackend na aba Agenda
+        async function carregarAgenda() {
+            alert("Aqui você pode implementar o fetch() para buscar os dados de: " + urlBackend);
+            // Exemplo de chamada:
+            // let resposta = await fetch(urlBackend);
+            // let dados = await resposta.json();
+        }
     </script>
 </body>
 </html>
